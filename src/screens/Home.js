@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
     const [ponto, setPonto] = useState(0);
     const [ponto2, setPonto2] = useState(0);
     const [num, setNum] = useState(0);
@@ -9,50 +9,53 @@ const Home = ({ navigation }) => {
 
     const ganhoSet = () => {
       if (ponto == 25){
-        setNum(ponto + 1);
-        setPonto(0)
-        setPonto2(0) 
+        setNum(num + 1);
+        setPonto(0);
+        setPonto2(0);
       } else if(ponto2 == 25){
         setNum2(num2 + 1)
-        setPonto(0)
-        setPonto2(0)
+        setPonto(0);
+        setPonto2(0);
       }
     }
-
     
     return (
       <View>
 
-        <Text>Set</Text>
+        <Text style={ styles.sets }>Set</Text>
         <Text>{ganhoSet()}{num}</Text>
 
-        <Text></Text>
-        <View>{ponto}</View>
-        <Button title='+' 
+        <Text>{route.params?.username}</Text>
+        <View style={styles.pontuacao}>
+          <Text>{ponto}</Text>
+        </View>
+        <Button title="+"
         onPress={() => setPonto(ponto + 1)} />
         
-        <Button title='-'
+        <Button title="-"
         onPress={() => setPonto(ponto - 1)} />
         
 
         <Text>X</Text>
         <View ></View>
 
-        <Text>Set</Text>
+        <Text style={ styles.sets }>Set</Text>
         <Text>{num2}</Text>
 
-        <Text></Text>
-        <View>{ponto}</View>
-        <Button title='+'
+        <Text>{route.params?.username2}</Text>
+        <View style={styles.pontuacao}>
+          <Text>{ponto2}</Text>
+        </View>
+        <Button title="+"
         onPress={() => setPonto2(ponto2 + 1)} />
 
-        <Button title='-' 
+        <Button title="-"
         onPress={() => setPonto2(ponto2 - 1)} />
 
         <View></View>
 
-        <Text>Deseja mudar os times?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity 
+        onPress={() => navigation.navigate("Login")}>
           <Text>Voltar</Text>
         </TouchableOpacity>
 

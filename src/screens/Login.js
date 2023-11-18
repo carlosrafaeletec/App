@@ -10,7 +10,7 @@ export const Login = ({ navigation }) => {
     // Verificar se ambos os campos de nome de usuário estão preenchidos
     if (username.trim() !== '' && username2.trim() !== '') {
       // Navegar para a tela "Home" apenas se ambos os campos estiverem preenchidos
-      navigation.navigate('Home');
+      navigation.navigate('Home', {username, username2});
     } else {
       // Exibir uma mensagem de erro ou fazer qualquer outra ação desejada se os campos não estiverem preenchidos
       alert('Por favor, preencha ambos os campos de Time.');
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    color: '#00000', // Cor do texto do botão
+    color: '#000000', // Cor do texto do botão
     fontSize: 16,
     fontWeight: 'bold',
   },
