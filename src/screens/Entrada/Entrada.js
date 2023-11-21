@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import Fonte from '../../components/Fonte';
 
 const Entrada = ({ navigation, route, teste, logoApp }) => {
@@ -15,7 +15,7 @@ const Entrada = ({ navigation, route, teste, logoApp }) => {
     // Verificar se ambos os campos de nome de usuário estão preenchidos
     if (username.trim() !== '' && username2.trim() !== '') {
       // Navegar para a tela "Home" apenas se ambos os campos estiverem preenchidos
-      navigation.navigate('Home', {username, username2});
+      navigation.navigate('Cont', {username, username2});
     } else {
       // Exibir uma mensagem de erro ou fazer qualquer outra ação desejada se os campos não estiverem preenchidos
       alert('Por favor, preencha ambos os campos de Time.');
@@ -23,51 +23,62 @@ const Entrada = ({ navigation, route, teste, logoApp }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/logo.png')}
-        style={styles.logo}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Time 1:"
-        placeholderTextColor="#fff"
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize='words'
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Time 2:"
-        placeholderTextColor="#FFF"
-        value={username2}
-        onChangeText={setUsername2}
-        autoCapitalize='words'
-      />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Fonte style={styles.buttonText}>Entrar</Fonte>
-      </TouchableOpacity>
+    <ImageBackground style={styles.fundoImg}
+    source={require('../../../assets/entrar.png')}>
 
-      <TouchableOpacity style={styles.button}
-      onPress={() => navigation.navigate("Hist", {aftUser, aftUser2, set1, set2 })}>
-        <Fonte style={styles.buttonTxt}>Historico</Fonte>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.container}>
+        <Image
+          source={require('../../../assets/logo.png')}
+          style={styles.logo}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Time 1:"
+          placeholderTextColor="#fff"
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize='words'
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Time 2:"
+          placeholderTextColor="#FFF"
+          value={username2}
+          onChangeText={setUsername2}
+          autoCapitalize='words'
+        />
+
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Fonte style={styles.buttonText}>Entrar</Fonte>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button}
+        onPress={() => navigation.navigate("Hist", {aftUser, aftUser2, set1, set2 })}>
+          <Fonte style={styles.buttonText2}>Historico</Fonte>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  fundoImg:{
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000', // Cor de fundo da tela
+    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    paddingTop: 20,
   },
   logo: {
     width: 300,
     height: 150,
-    bottom: 70,
+    bottom: 30,
   },
   input: {
     width: '80%',
@@ -82,20 +93,24 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    backgroundColor: '#fff', // Cor de fundo do botão
+    backgroundColor: 'transparent', // Cor de fundo do botão
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 50,
     borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   buttonText: {
-    color: '#000000', // Cor do texto do botão
+    color: '#fff', // Cor do texto do botão
     fontSize: 16,
     fontWeight: 'bold',
   },
-  buttonTxt:{
+  buttonText2:{
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    color: '#fff',
+
   }
 });
 
